@@ -1,0 +1,6 @@
+name: OraxenTransparentBlocks
+version: ${project.version}
+main: me.playajames.oraxentransparentblocks.OraxenTransparentBlocks
+api-version: 1.16
+depend: [Oraxen]
+authors: [playajames]
