@@ -1,6 +1,5 @@
 package me.playajames.oraxentransparentblocks.Listeners;
 
-import me.playajames.oraxentransparentblocks.CustomBlock;
 import me.playajames.oraxentransparentblocks.CustomBlockManager;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;

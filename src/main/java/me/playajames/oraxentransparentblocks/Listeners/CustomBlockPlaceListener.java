@@ -25,6 +25,6 @@ public class CustomBlockPlaceListener implements Listener {
 
         if (factory.isNotImplementedIn(oraxenItemId)) return;
 
-
+        System.out.println("CustomBlockPlaceListener triggered.");
     }
 }

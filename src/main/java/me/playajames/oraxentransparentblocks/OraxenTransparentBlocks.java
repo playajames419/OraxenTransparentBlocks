@@ -6,6 +6,7 @@ import me.playajames.oraxentransparentblocks.Listeners.ChunkLoadListener;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkUnloadListener;
 import me.playajames.oraxentransparentblocks.Listeners.CustomBlockPlaceListener;
 import me.playajames.oraxentransparentblocks.Listeners.PlayerJoinListener;
+import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanic;
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanicFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -38,6 +39,5 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChunkLoadListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChunkUnloadListener(), this);
-        this.getServer().getPluginManager().registerEvents(new CustomBlockPlaceListener(factory), this);
     }
 }
