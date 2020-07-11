@@ -6,7 +6,6 @@ import me.playajames.oraxentransparentblocks.Listeners.ChunkLoadListener;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkUnloadListener;
 import me.playajames.oraxentransparentblocks.Listeners.PlayerJoinListener;
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanicFactory;
-import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class OraxenTransparentBlocks extends JavaPlugin {
@@ -18,20 +17,20 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
         loadConfig();
         registerListeners();
         MechanicsManager.registerMechanicFactory("transparentBlock", TransparentBlockMechanicFactory.class);
-        Bukkit.getLogger().info("Enabled successfully.");
+        getLogger().info("Enabled successfully.");
     }
 
     @Override
     public void onDisable() {
         CustomBlockManager.saveAll();
-        Bukkit.getLogger().info("Disabled successfully.");
+        getLogger().info("Disabled successfully.");
     }
 
     private void loadConfig() {
         this.saveDefaultConfig();
         CONFIG = new Config("config", "plugins/OraxenTransparentBlocks");
         String debug = CONFIG.getBoolean("debug") ? "enabled" : "disabled";
-        Bukkit.getLogger().info("Debugging is " + debug + ".");
+        getLogger().info("Debugging is " + debug + ".");
     }
 
     private void registerListeners() {
