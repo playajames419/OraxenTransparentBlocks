@@ -2,6 +2,7 @@ package me.playajames.oraxentransparentblocks;
 
 import me.playajames.oraxentransparentblocks.Utils.ArmorStandUtils;
 import org.bukkit.Chunk;
+import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -24,20 +25,20 @@ public class CustomBlock {
         return armorStand;
     }
 
-    public boolean place() {
-        return false;
+    public void breakNaturally() {
+        World world = armorStand.getWorld();
+        for (ItemStack item : getDrops())
+            world.dropItemNaturally(armorStand.getLocation(), item);
+        destroy();
     }
 
-    public boolean breakNaturally() {
-        return false;
+    public void setBlockType(ItemStack item) {
+        armorStand.getEquipment().setHelmet(item);
     }
 
-    public void setBlockType() {
-        return;
-    }
-
-    public boolean destroy() {
-        return false;
+    public void destroy() {
+        CustomBlockManager.removeBlock(this);
+        armorStand.remove();
     }
 
     private List<ItemStack> getDrops() {

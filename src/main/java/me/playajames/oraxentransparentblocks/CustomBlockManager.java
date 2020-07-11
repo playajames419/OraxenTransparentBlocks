@@ -5,7 +5,6 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -24,6 +23,14 @@ public class CustomBlockManager {
         armorStand.setVisible(CONFIG.getBoolean("armorstandsVisible"));
         armorStand.getEquipment().setHelmet(item);
         return new CustomBlock(armorStand);
+    }
+
+    public static boolean isBlock(ArmorStand armorStand) {
+        List<CustomBlock> blocks = getBlocks(armorStand.getChunk());
+        for (CustomBlock block : blocks)
+            if (block.getArmorStand().getUniqueId().equals(armorStand.getUniqueId()))
+                return true;
+        return false;
     }
 
     public static boolean addBlock(CustomBlock block) {
@@ -109,8 +116,18 @@ public class CustomBlockManager {
     public static void saveChunk(Chunk chunk) {
         if (!isChunkLoaded(chunk)) return;
         Yaml storage = new Yaml(String.valueOf(chunk.getChunkKey()), dataFolderPath + chunk.getWorld().getUID());
-        for (CustomBlock block : loadedBlocks.get(chunk.getWorld()).get(chunk).values())
+        Collection<CustomBlock> blocks = loadedBlocks.get(chunk.getWorld()).get(chunk).values();
+        Set<String> activeStoredBlocks = storage.keySet();
+        for (CustomBlock block : blocks) {
+            if (activeStoredBlocks.contains(block.getArmorStand().getUniqueId())) {
+                activeStoredBlocks.remove(block.getArmorStand().getUniqueId());
+                continue;
+            }
             storage.set(block.serialize(), null);
+        }
+        if (activeStoredBlocks.isEmpty()) return;
+        for (String key : activeStoredBlocks)
+            storage.remove(key);
     }
 
     public static void saveAll() {
@@ -138,20 +155,10 @@ public class CustomBlockManager {
 
         for (String section : sections) {
             CustomBlock block = new CustomBlock(section, chunk);
+            if (block.getArmorStand() == null) continue;
             blocks.put(block.getArmorStand().getUniqueId(), block);
         }
 
         return blocks;
-    }
-
-    private static List<ArmorStand> getArmorStands(Chunk chunk) {
-        List<Entity> allEntities = Arrays.asList(chunk.getEntities());
-        if (allEntities.isEmpty()) return null;
-        List<ArmorStand> armorStands = new ArrayList<>();
-        for (Entity entity : allEntities) {
-            if (entity instanceof ArmorStand)
-                armorStands.add((ArmorStand) entity);
-        }
-        return armorStands.isEmpty() ? null : armorStands;
     }
 }

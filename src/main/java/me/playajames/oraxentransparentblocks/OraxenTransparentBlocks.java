@@ -4,6 +4,7 @@ import de.leonhard.storage.Config;
 import io.th0rgal.oraxen.mechanics.MechanicsManager;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkLoadListener;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkUnloadListener;
+import me.playajames.oraxentransparentblocks.Listeners.CustomBlockPlaceListener;
 import me.playajames.oraxentransparentblocks.Listeners.PlayerJoinListener;
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanicFactory;
 import org.bukkit.Bukkit;
@@ -17,14 +18,13 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
     public void onEnable() {
         loadConfig();
         registerListeners();
-        //this.getServer().getPluginManager().registerEvents(new JoinListener(), this);
         MechanicsManager.registerMechanicFactory("transparent", TransparentBlockMechanicFactory.class);
         Bukkit.getLogger().info("Enabled successfully.");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        Bukkit.getLogger().info("Disabled successfully.");
     }
 
     private void loadConfig() {
@@ -38,5 +38,6 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChunkLoadListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChunkUnloadListener(), this);
+        this.getServer().getPluginManager().registerEvents(new CustomBlockPlaceListener(factory), this);
     }
 }
