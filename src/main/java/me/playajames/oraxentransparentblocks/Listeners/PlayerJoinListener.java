@@ -1,5 +1,6 @@
 package me.playajames.oraxentransparentblocks.Listeners;
 
+import me.playajames.oraxentransparentblocks.CustomBlock;
 import me.playajames.oraxentransparentblocks.CustomBlockManager;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -10,6 +11,8 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
-        CustomBlockManager.createBlock(event.getPlayer().getLocation(), new ItemStack(Material.DIRT));
+        CustomBlock block = CustomBlockManager.createBlock(event.getPlayer().getLocation(), new ItemStack(Material.DIRT));
+        CustomBlockManager.addBlock(block);
+        CustomBlockManager.saveAll();
     }
 }

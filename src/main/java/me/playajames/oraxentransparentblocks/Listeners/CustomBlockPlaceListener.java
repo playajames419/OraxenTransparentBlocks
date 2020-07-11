@@ -2,8 +2,6 @@ package me.playajames.oraxentransparentblocks.Listeners;
 
 import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
-import me.playajames.oraxentransparentblocks.CustomBlockManager;
-import org.bukkit.entity.ArmorStand;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;

@@ -34,14 +34,13 @@ public class CustomBlockManager {
     }
 
     public static boolean addBlock(CustomBlock block) {
-        plugin.getLogger().info("Adding block...");
+        if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Adding block...");
         Chunk chunk = block.getArmorStand().getLocation().getChunk();
         if (!isChunkLoaded(chunk)) return false;
-        plugin.getLogger().info("Chunk is loaded.");
+        if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Chunk is loaded.");
         if (loadedBlocks.get(chunk.getWorld()).get(chunk).containsKey(block.getArmorStand().getUniqueId())) return false;
-        plugin.getLogger().info("Block already exists.");
         loadedBlocks.get(chunk.getWorld()).get(chunk).put(block.getArmorStand().getUniqueId(), block);
-        plugin.getLogger().info("Block added successfully. >> " + block.serializeVerbose());
+        if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Block added successfully. >> " + block.serializeVerbose());
         return true;
     }
 
@@ -119,8 +118,8 @@ public class CustomBlockManager {
         Collection<CustomBlock> blocks = loadedBlocks.get(chunk.getWorld()).get(chunk).values();
         Set<String> activeStoredBlocks = storage.keySet();
         for (CustomBlock block : blocks) {
-            if (activeStoredBlocks.contains(block.getArmorStand().getUniqueId())) {
-                activeStoredBlocks.remove(block.getArmorStand().getUniqueId());
+            if (activeStoredBlocks.contains(block.getArmorStand().getUniqueId().toString())) {
+                activeStoredBlocks.remove(block.getArmorStand().getUniqueId().toString());
                 continue;
             }
             storage.set(block.serialize(), null);
