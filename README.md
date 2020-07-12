@@ -6,7 +6,7 @@ This is an addon to the Premium plugin [Oraxen](https://github.com/oraxen/Oraxen
 
 Native Version: 1.16.1
 
-![With](https://i.imgur.com/fiwYM3M.png)
+![With](https://i.imgur.com/JXxGKBj.png)
 
 ## Getting Started
 
