@@ -37,13 +37,13 @@ caveblock_transparent:
     transparent_block:
       # Sounds not implemented yet
       #break_sound: BLOCK_GLASS_BREAK
-      armorstand_visible: true
-      armorstand_small: true
+      armorstand_visible: false
+      armorstand_small: false
       block_gravity: false
       drop:
         loots:
-          - {oraxen_item: caveblock, probability: 1.0, max_amount: 32}
-          - {minecraft_type: DIRT, probability: 1.0, max_amount: 64}
+          - {oraxen_item: caveblock_transparent, probability: 1.0, max_amount: 1}
+          - {minecraft_type: DIRT, probability: 1, max_amount: 1}
 ```
 
 ## Block Models
