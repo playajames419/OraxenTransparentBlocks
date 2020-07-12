@@ -54,4 +54,8 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
         }
     }
 
+    // TODO implement drops for blocks
+    // TODO implement way to limit about of entites to render, make command to allow players to lower this value
+
+
 }
