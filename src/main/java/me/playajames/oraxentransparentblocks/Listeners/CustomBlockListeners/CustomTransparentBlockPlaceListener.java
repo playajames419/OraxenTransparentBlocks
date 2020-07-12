@@ -1,7 +1,9 @@
 package me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners;
 
+import io.th0rgal.oraxen.OraxenPlugin;
 import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
+import io.th0rgal.oraxen.mechanics.MechanicsManager;
 import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPlaceEvent;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPrePlaceEvent;
@@ -34,20 +36,22 @@ public class CustomTransparentBlockPlaceListener implements Listener {
         String oraxenItemId = OraxenItems.getIdByItem(item);
         if (oraxenItemId == null) return;
 
-        if (!factory.getMechanicID().equals("transparent_block")) return;
+        // This keeps returning true.
+        if (factory.isNotImplementedIn(oraxenItemId)) return;
 
         Location location = event.getClickedBlock().getLocation().getBlock().getRelative(event.getBlockFace()).getLocation();
         location.add(0.5, 0, 0.5);
 
         if (!PlayerUtils.canBuild(event.getPlayer(), location)) return;
 
+        // This is returning a null mechanic
         //TransparentBlockMechanic mechanic = (TransparentBlockMechanic) factory.getMechanic(oraxenItemId);
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPrePlaceEvent(event.getPlayer(), item, location));
 
         event.getPlayer().getInventory().setItemInMainHand(item.clone().subtract(1));
 
-        CustomTransparentBlock block = new CustomTransparentBlock(item, location, false, true);
+        CustomTransparentBlock block = new CustomTransparentBlock(item, location, false, true, false);
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), block));
 

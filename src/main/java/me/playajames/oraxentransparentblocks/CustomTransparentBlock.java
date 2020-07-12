@@ -15,10 +15,11 @@ public class CustomTransparentBlock {
     @NotNull
     private ArmorStand armorStand;
 
-    public CustomTransparentBlock(ItemStack item, Location location, boolean isVisible, boolean isSmall) {
+    public CustomTransparentBlock(ItemStack item, Location location, boolean isVisible, boolean isSmall, boolean hasGravity) {
         this.armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setVisible(isVisible);
         armorStand.setSmall(isSmall);
+        armorStand.setGravity(hasGravity);
         armorStand.getEquipment().setHelmet(item);
         CustomTransparentBlockManager.addBlock(this);
     }
