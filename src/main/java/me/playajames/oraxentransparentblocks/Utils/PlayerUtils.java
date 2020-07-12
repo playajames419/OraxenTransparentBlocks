@@ -1,20 +1,19 @@
 package me.playajames.oraxentransparentblocks.Utils;
 
-import org.bukkit.Bukkit;
+import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldguard.WorldGuard;
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sk89q.worldguard.protection.flags.Flags;
+import com.sk89q.worldguard.protection.regions.RegionQuery;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
 
 public class PlayerUtils {
 
     public static boolean canBuild(Player player, Location location) {
-
-        return true;
-
-//        BlockBreakEvent fakeEvent = new BlockBreakEvent(location.getBlock(), player);
-//        Bukkit.getPluginManager().callEvent(fakeEvent);
-//        if (!fakeEvent.isCancelled()) return true;
-//        return false;
+        RegionQuery query = WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery();
+        com.sk89q.worldedit.util.Location loc = BukkitAdapter.adapt(location);
+        return query.testState(loc, WorldGuardPlugin.inst().wrapPlayer(player), Flags.BUILD);
     }
 
 }

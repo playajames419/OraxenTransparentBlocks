@@ -1,6 +1,5 @@
 package me.playajames.oraxentransparentblocks.Events;
 
-import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
