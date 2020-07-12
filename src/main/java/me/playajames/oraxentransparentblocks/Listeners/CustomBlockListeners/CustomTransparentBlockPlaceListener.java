@@ -45,13 +45,13 @@ public class CustomTransparentBlockPlaceListener implements Listener {
         if (!PlayerUtils.canBuild(event.getPlayer(), location)) return;
 
         // This is returning a null mechanic
-        //TransparentBlockMechanic mechanic = (TransparentBlockMechanic) factory.getMechanic(oraxenItemId);
+        TransparentBlockMechanic mechanic = (TransparentBlockMechanic) factory.getMechanic(oraxenItemId);
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPrePlaceEvent(event.getPlayer(), item, location));
 
         event.getPlayer().getInventory().setItemInMainHand(item.clone().subtract(1));
 
-        CustomTransparentBlock block = new CustomTransparentBlock(item, location, false, true, false);
+        CustomTransparentBlock block = new CustomTransparentBlock(item, location, mechanic.isVisible(), mechanic.isSmall(), mechanic.hasGravity());
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), block));
 
