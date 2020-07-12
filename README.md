@@ -71,7 +71,7 @@ Although not very extensive, this plugin call's the following custom events for 
 <dependency>
     <groupId>com.github.playajames419</groupId>
     <artifactId>OraxenTransparentBlocks</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 </dependency>
 ```
 
