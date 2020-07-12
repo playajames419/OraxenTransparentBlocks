@@ -87,4 +87,4 @@ Although not very extensive, this plugin call's the following custom events for 
 
 ## License
 
-This project is licensed under the GPL License
+This project is licensed under the GNU GPLv3 License
