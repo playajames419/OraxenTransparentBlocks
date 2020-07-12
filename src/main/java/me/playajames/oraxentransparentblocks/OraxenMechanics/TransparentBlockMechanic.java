@@ -56,7 +56,6 @@ public class TransparentBlockMechanic extends Mechanic {
             for (Object obj : lootConfig.keySet())
                 System.out.println(obj);
             drops.add(new Loot(lootConfig));
-            System.out.println("Break");
         }
     }
 }
