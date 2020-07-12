@@ -5,6 +5,7 @@ import io.th0rgal.oraxen.mechanics.Mechanic;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
 import io.th0rgal.oraxen.mechanics.MechanicsManager;
 import me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners.CustomTransparentBlockBreakListener;
+import me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners.CustomTransparentBlockInteractListener;
 import me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners.CustomTransparentBlockPlaceListener;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -14,6 +15,7 @@ public class TransparentBlockMechanicFactory extends MechanicFactory {
         super(section);
         MechanicsManager.registerListeners(OraxenPlugin.get(), new CustomTransparentBlockPlaceListener(this));
         MechanicsManager.registerListeners(OraxenPlugin.get(), new CustomTransparentBlockBreakListener(this));
+        MechanicsManager.registerListeners(OraxenPlugin.get(), new CustomTransparentBlockInteractListener());
     }
 
     @Override

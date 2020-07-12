@@ -2,27 +2,17 @@ package me.playajames.oraxentransparentblocks;
 
 import de.leonhard.storage.Yaml;
 import org.bukkit.Chunk;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
 
 import java.util.*;
 
-import static me.playajames.oraxentransparentblocks.OraxenTransparentBlocks.CONFIG;
-
 public class CustomTransparentBlockManager {
     private static HashMap<World, HashMap<Chunk, HashMap<UUID, CustomTransparentBlock>>> loadedBlocks = new HashMap<>();
-    private static Plugin plugin = OraxenTransparentBlocks.getPlugin(OraxenTransparentBlocks.class);
     private static String dataFolderPath = OraxenTransparentBlocks.getPlugin(OraxenTransparentBlocks.class).getDataFolder().getPath() + "/data/";
 
     public static boolean isBlock(ArmorStand armorStand) {
-        List<CustomTransparentBlock> blocks = getBlocks(armorStand.getChunk());
-        for (CustomTransparentBlock block : blocks)
-            if (block.getArmorStand().getUniqueId().equals(armorStand.getUniqueId()))
-                return true;
+        if (getBlock(armorStand) != null) return true;
         return false;
     }
 
@@ -80,7 +70,11 @@ public class CustomTransparentBlockManager {
     }
 
     public static CustomTransparentBlock getBlock(ArmorStand armorStand) {
-        return new CustomTransparentBlock(armorStand);
+        List<CustomTransparentBlock> blocks = getBlocks(armorStand.getChunk());
+        for (CustomTransparentBlock block : blocks)
+            if (block.getArmorStand().getUniqueId().equals(armorStand.getUniqueId()))
+                return block;
+        return null;
     }
 
     public static List<CustomTransparentBlock> getBlocks(World world) {

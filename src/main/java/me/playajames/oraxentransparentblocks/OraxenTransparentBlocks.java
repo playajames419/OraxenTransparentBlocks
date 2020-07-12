@@ -1,7 +1,6 @@
 package me.playajames.oraxentransparentblocks;
 
 import de.leonhard.storage.Config;
-import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicsManager;
 import me.playajames.oraxentransparentblocks.Commands.OTBCommand;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkLoadListener;

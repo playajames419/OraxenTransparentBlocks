@@ -5,6 +5,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -18,6 +19,7 @@ public class CustomTransparentBlock {
         armorStand.setSmall(isSmall);
         armorStand.setGravity(hasGravity);
         armorStand.getEquipment().setHelmet(item);
+        armorStand.addDisabledSlots(EquipmentSlot.HEAD);
         CustomTransparentBlockManager.addBlock(this);
     }
 

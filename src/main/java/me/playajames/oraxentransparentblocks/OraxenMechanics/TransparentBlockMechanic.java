@@ -52,10 +52,7 @@ public class TransparentBlockMechanic extends Mechanic {
 
     private void parseDrops(ConfigurationSection section) {
         if (!section.contains("loots")) return;
-        for (LinkedHashMap<String, Object> lootConfig : (List<LinkedHashMap<String, Object>>) section.getList("loots")) {
-            for (Object obj : lootConfig.keySet())
-                System.out.println(obj);
+        for (LinkedHashMap<String, Object> lootConfig : (List<LinkedHashMap<String, Object>>) section.getList("loots"))
             drops.add(new Loot(lootConfig));
-        }
     }
 }
