@@ -1,5 +1,7 @@
 # Oraxen Transparent Blocks
 
+> This plugin is a work in progress, many features are not yet finished, including block drops.
+
 This is an addon to the Premium plugin [Oraxen](https://github.com/oraxen/Oraxen). It adds the ability to use custom models that are transparent or don't fill an entire block without render issues.
 
 ## Getting Started
@@ -53,6 +55,16 @@ caveblock:
 ## Block Models
 
 When creating custom models to use with this plugin, you will need to modify the armorstand's helmet display settings to your likings. This is how the block will show in-game.
+
+## Developers
+
+Although not very extensive, this plugin call's the following custom events for developers to use;
+
+* OraxenTransparentBlockInteractEvent
+* OraxenTransparentBlockPrePlaceEvent
+* OraxenTransparentBlockPlaceEvent
+* OraxenTransparentBlockPreBreakEvent
+* OraxenTransparentBlockBreakEvent
 
 ## License
 
