@@ -18,7 +18,7 @@ Place the plugin jar file in your servers plugins directory.
 
 Create a custom item/block using [Oraxen](https://github.com/oraxen/Oraxen) and give your item/block the transpatent_block mechanic.
 
-Example:
+### Example:
 
 ```yaml
 test-block:
