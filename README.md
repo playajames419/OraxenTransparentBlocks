@@ -70,6 +70,21 @@ Although not very extensive, this plugin call's the following custom events for 
 * OraxenTransparentBlockPreBreakEvent
 * OraxenTransparentBlockBreakEvent
 
+### Add OraxenTransparentBlocks to your plugin
+
+```xml
+<repository>
+    <id>jitpack.io</id>
+    <url>https://jitpack.io</url>
+</repository>
+  
+<dependency>
+    <groupId>com.github.playajames419</groupId>
+    <artifactId>OraxenTransparentBlocks</artifactId>
+    <version>1.0-SNAPSHOT</version>
+</dependency>
+```
+
 ## License
 
 This project is licensed under the GPL License
