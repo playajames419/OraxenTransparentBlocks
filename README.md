@@ -58,6 +58,8 @@ caveblock:
 
 When creating custom models to use with this plugin, you will need to modify the armorstand's helmet display settings to your likings. This is how the block will show in-game.
 
+![Transparent Caveblock](https://i.imgur.com/lyenwqm.png)
+
 ## Developers
 
 Although not very extensive, this plugin call's the following custom events for developers to use;
