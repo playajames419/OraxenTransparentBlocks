@@ -6,6 +6,8 @@ This is an addon to the Premium plugin [Oraxen](https://github.com/oraxen/Oraxen
 
 Native Version: 1.16.1
 
+![With](https://i.imgur.com/JXxGKBj.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -57,8 +59,6 @@ caveblock:
 ## Block Models
 
 When creating custom models to use with this plugin, you will need to modify the armorstand's helmet display settings to your likings. This is how the block will show in-game.
-
-![Transparent Caveblock](https://i.imgur.com/lyenwqm.png)
 
 ## Developers
 
