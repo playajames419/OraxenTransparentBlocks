@@ -27,33 +27,23 @@ Create a custom item/block using [Oraxen](https://github.com/oraxen/Oraxen) and 
 ### Example:
 
 ```yaml
-test-block:
-  displayname: '&7Test Block'
-  material: STICK
-  Pack:
-    generate_model: true
-    parent_model: block/cube_all
-    textures:
-    - sweet_test_texture
-    custom_model_data: 1
-  Mechanics:
-    transparent_block:
-      # These settings arent working yet
-      armorstand_visible: true
-      armorstand_small: true
-caveblock:
-  displayname: '&7Cave Block'
+caveblock_transparent:
+  displayname: "&7Cave Block Transparent"
   material: DIAMOND
   Pack:
     generate_model: false
     model: caveblock
-    custom_model_data: 1
   Mechanics:
     transparent_block:
-      # These settings arent working yet
-      armorstand_visible: false
+      # Sounds not implemented yet
+      #break_sound: BLOCK_GLASS_BREAK
+      armorstand_visible: true
       armorstand_small: true
-      drops:
+      block_gravity: false
+      drop:
+        loots:
+          - {oraxen_item: caveblock, probability: 1.0, max_amount: 32}
+          - {minecraft_type: DIRT, probability: 1.0, max_amount: 64}
 ```
 
 ## Block Models
