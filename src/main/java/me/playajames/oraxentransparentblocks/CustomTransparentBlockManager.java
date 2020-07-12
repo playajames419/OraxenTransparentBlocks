@@ -27,13 +27,10 @@ public class CustomTransparentBlockManager {
     }
 
     public static boolean addBlock(CustomTransparentBlock block) {
-        if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Adding block...");
         Chunk chunk = block.getArmorStand().getLocation().getChunk();
         if (!isChunkLoaded(chunk)) return false;
-        if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Chunk is loaded.");
         if (loadedBlocks.get(chunk.getWorld()).get(chunk).containsKey(block.getArmorStand().getUniqueId())) return false;
         loadedBlocks.get(chunk.getWorld()).get(chunk).put(block.getArmorStand().getUniqueId(), block);
-        if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Block added successfully. >> " + block.serializeVerbose());
         return true;
     }
 
