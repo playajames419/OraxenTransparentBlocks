@@ -1,6 +1,7 @@
 package me.playajames.oraxentransparentblocks;
 
 import de.leonhard.storage.Config;
+import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicsManager;
 import me.playajames.oraxentransparentblocks.Commands.OTBCommand;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkLoadListener;
@@ -21,6 +22,7 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
         startScheduler();
         MechanicsManager.registerMechanicFactory("transparent_block", TransparentBlockMechanicFactory.class);
         getLogger().info("Mechanic 'transparentBlock' registered with Oraxen.");
+        //OraxenItems.loadItems();
         getLogger().info("Enabled successfully.");
     }
 

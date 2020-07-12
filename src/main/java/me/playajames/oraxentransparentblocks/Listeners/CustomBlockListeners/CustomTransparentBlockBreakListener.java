@@ -1,10 +1,15 @@
 package me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners;
 
+import io.th0rgal.oraxen.items.OraxenItems;
+import io.th0rgal.oraxen.mechanics.Mechanic;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
+import io.th0rgal.oraxen.mechanics.MechanicsManager;
+import io.th0rgal.oraxen.utils.drops.Loot;
 import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
 import me.playajames.oraxentransparentblocks.CustomTransparentBlockManager;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockBreakEvent;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPreBreakEvent;
+import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanic;
 import me.playajames.oraxentransparentblocks.Utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -43,7 +48,12 @@ public class CustomTransparentBlockBreakListener implements Listener {
         ItemStack item = block.getArmorStand().getItem(EquipmentSlot.HEAD);
         Location location = block.getArmorStand().getLocation();
 
-        block.breakNaturally();
+        TransparentBlockMechanic mechanic = (TransparentBlockMechanic) factory.getMechanic(OraxenItems.getIdByItem(item));
+
+        block.destroy();
+
+        for (Loot loot : mechanic.getDrops())
+            loot.dropNaturally(location, 1);
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockBreakEvent(player, item, location));
 

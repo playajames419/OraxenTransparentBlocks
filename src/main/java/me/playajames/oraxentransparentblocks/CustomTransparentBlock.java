@@ -3,13 +3,10 @@ package me.playajames.oraxentransparentblocks;
 import me.playajames.oraxentransparentblocks.Utils.ArmorStandUtils;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 public class CustomTransparentBlock {
     @NotNull
@@ -36,13 +33,13 @@ public class CustomTransparentBlock {
         return armorStand;
     }
 
-    public void breakNaturally() {
-        World world = armorStand.getWorld();
-        if (getDrops() != null)
-            for (ItemStack item : getDrops())
-                world.dropItemNaturally(armorStand.getLocation(), item);
-        destroy();
-    }
+//    public void breakNaturally() {
+//        World world = armorStand.getWorld();
+//        if (getDrops() != null)
+//            for (Loot drop : getDrops())
+//                drop.dropNaturally(armorStand.getLocation(), 0);
+//        destroy();
+//    }
 
     public void setBlockType(ItemStack item) {
         armorStand.getEquipment().setHelmet(item);
@@ -51,10 +48,6 @@ public class CustomTransparentBlock {
     public void destroy() {
         CustomTransparentBlockManager.removeBlock(this);
         armorStand.remove();
-    }
-
-    private List<ItemStack> getDrops() {
-        return null;
     }
 
     public String serialize() {

@@ -1,9 +1,7 @@
 package me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners;
 
-import io.th0rgal.oraxen.OraxenPlugin;
 import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
-import io.th0rgal.oraxen.mechanics.MechanicsManager;
 import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPlaceEvent;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPrePlaceEvent;
