@@ -1,4 +1,4 @@
-# Project Title
+# Oraxen Transparent Blocks
 
 This is an addon to the Premium plugin Oraxen. It adds the ability to use custom models that are transparent or don't fill an entire block without render issues.
 
