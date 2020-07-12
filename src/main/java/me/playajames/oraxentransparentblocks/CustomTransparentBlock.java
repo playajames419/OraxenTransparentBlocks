@@ -2,22 +2,32 @@ package me.playajames.oraxentransparentblocks;
 
 import me.playajames.oraxentransparentblocks.Utils.ArmorStandUtils;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class CustomBlock {
+public class CustomTransparentBlock {
     @NotNull
     private ArmorStand armorStand;
 
-    public CustomBlock(ArmorStand armorStand) {
+    public CustomTransparentBlock(ItemStack item, Location location, boolean isVisible, boolean isSmall) {
+        this.armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+        armorStand.setVisible(isVisible);
+        armorStand.setSmall(isSmall);
+        armorStand.getEquipment().setHelmet(item);
+        CustomTransparentBlockManager.addBlock(this);
+    }
+
+    public CustomTransparentBlock(ArmorStand armorStand) {
         this.armorStand = armorStand;
     }
 
-    public CustomBlock(String serializedCustomBlock, Chunk chunk) {
+    public CustomTransparentBlock(String serializedCustomBlock, Chunk chunk) {
         this.armorStand = ArmorStandUtils.findArmorStand(serializedCustomBlock, chunk);
     }
 
@@ -27,8 +37,9 @@ public class CustomBlock {
 
     public void breakNaturally() {
         World world = armorStand.getWorld();
-        for (ItemStack item : getDrops())
-            world.dropItemNaturally(armorStand.getLocation(), item);
+        if (getDrops() != null)
+            for (ItemStack item : getDrops())
+                world.dropItemNaturally(armorStand.getLocation(), item);
         destroy();
     }
 
@@ -37,7 +48,7 @@ public class CustomBlock {
     }
 
     public void destroy() {
-        CustomBlockManager.removeBlock(this);
+        CustomTransparentBlockManager.removeBlock(this);
         armorStand.remove();
     }
 

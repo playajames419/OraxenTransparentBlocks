@@ -2,5 +2,8 @@ name: OraxenTransparentBlocks
 version: ${project.version}
 main: me.playajames.oraxentransparentblocks.OraxenTransparentBlocks
 api-version: 1.16
-depend: [Oraxen]
+depend: [Oraxen, WorldGuard]
 authors: [playajames]
+commands:
+  otb:
+    description: Reloads OraxenTransparentBlocks plugin, must be ran after reloading Oraxen.

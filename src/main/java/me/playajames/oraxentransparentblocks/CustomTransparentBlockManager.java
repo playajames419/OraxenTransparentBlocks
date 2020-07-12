@@ -13,27 +13,20 @@ import java.util.*;
 
 import static me.playajames.oraxentransparentblocks.OraxenTransparentBlocks.CONFIG;
 
-public class CustomBlockManager {
-    private static HashMap<World, HashMap<Chunk, HashMap<UUID, CustomBlock>>> loadedBlocks = new HashMap<>();
+public class CustomTransparentBlockManager {
+    private static HashMap<World, HashMap<Chunk, HashMap<UUID, CustomTransparentBlock>>> loadedBlocks = new HashMap<>();
     private static Plugin plugin = OraxenTransparentBlocks.getPlugin(OraxenTransparentBlocks.class);
     private static String dataFolderPath = OraxenTransparentBlocks.getPlugin(OraxenTransparentBlocks.class).getDataFolder().getPath() + "/data/";
 
-    public static CustomBlock createBlock(Location location, ItemStack item) {
-        ArmorStand armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
-        armorStand.setVisible(CONFIG.getBoolean("armorstandsVisible"));
-        armorStand.getEquipment().setHelmet(item);
-        return new CustomBlock(armorStand);
-    }
-
     public static boolean isBlock(ArmorStand armorStand) {
-        List<CustomBlock> blocks = getBlocks(armorStand.getChunk());
-        for (CustomBlock block : blocks)
+        List<CustomTransparentBlock> blocks = getBlocks(armorStand.getChunk());
+        for (CustomTransparentBlock block : blocks)
             if (block.getArmorStand().getUniqueId().equals(armorStand.getUniqueId()))
                 return true;
         return false;
     }
 
-    public static boolean addBlock(CustomBlock block) {
+    public static boolean addBlock(CustomTransparentBlock block) {
         if (CONFIG.getBoolean("debug")) plugin.getLogger().info("Adding block...");
         Chunk chunk = block.getArmorStand().getLocation().getChunk();
         if (!isChunkLoaded(chunk)) return false;
@@ -44,7 +37,7 @@ public class CustomBlockManager {
         return true;
     }
 
-    public static boolean removeBlock(CustomBlock block) {
+    public static boolean removeBlock(CustomTransparentBlock block) {
         Chunk chunk = block.getArmorStand().getLocation().getChunk();
         if (!isChunkLoaded(chunk)) return false;
         if (!loadedBlocks.get(chunk.getWorld()).get(chunk).containsKey(block.getArmorStand().getUniqueId())) return false;
@@ -75,7 +68,7 @@ public class CustomBlockManager {
 
     public static boolean loadChunk(Chunk chunk) {
         Yaml storage = new Yaml(String.valueOf(chunk.getChunkKey()), dataFolderPath + chunk.getWorld().getUID());
-        HashMap<UUID, CustomBlock> blocks = parseChunkStorageFile(chunk, storage);
+        HashMap<UUID, CustomTransparentBlock> blocks = parseChunkStorageFile(chunk, storage);
         if (!worldMapExists(chunk.getWorld())) generateWorldMap(chunk.getWorld());
         if (isChunkLoaded(chunk)) return true;
         loadedBlocks.get(chunk.getWorld()).put(chunk, blocks);
@@ -89,19 +82,23 @@ public class CustomBlockManager {
         return false;
     }
 
-    public static List<CustomBlock> getBlocks(World world) {
-        List<CustomBlock> blocksList = new ArrayList<CustomBlock>();
+    public static CustomTransparentBlock getBlock(ArmorStand armorStand) {
+        return new CustomTransparentBlock(armorStand);
+    }
+
+    public static List<CustomTransparentBlock> getBlocks(World world) {
+        List<CustomTransparentBlock> blocksList = new ArrayList<CustomTransparentBlock>();
         if (loadedBlocks.isEmpty()) return null;
-        for (HashMap<UUID, CustomBlock> chunkBlockMap : loadedBlocks.get(world).values())
-            for (CustomBlock block : chunkBlockMap.values())
+        for (HashMap<UUID, CustomTransparentBlock> chunkBlockMap : loadedBlocks.get(world).values())
+            for (CustomTransparentBlock block : chunkBlockMap.values())
                 blocksList.add(block);
         return blocksList;
     }
 
-    public static List<CustomBlock> getBlocks(Chunk chunk) {
+    public static List<CustomTransparentBlock> getBlocks(Chunk chunk) {
         if (!isChunkLoaded(chunk)) return null;
-        List<CustomBlock> blocksList = new ArrayList<>();
-        for (CustomBlock block : loadedBlocks.get(chunk.getWorld()).get(chunk).values())
+        List<CustomTransparentBlock> blocksList = new ArrayList<>();
+        for (CustomTransparentBlock block : loadedBlocks.get(chunk.getWorld()).get(chunk).values())
             blocksList.add(block);
         return blocksList;
     }
@@ -115,9 +112,9 @@ public class CustomBlockManager {
     public static void saveChunk(Chunk chunk) {
         if (!isChunkLoaded(chunk)) return;
         Yaml storage = new Yaml(String.valueOf(chunk.getChunkKey()), dataFolderPath + chunk.getWorld().getUID());
-        Collection<CustomBlock> blocks = loadedBlocks.get(chunk.getWorld()).get(chunk).values();
+        Collection<CustomTransparentBlock> blocks = loadedBlocks.get(chunk.getWorld()).get(chunk).values();
         Set<String> activeStoredBlocks = storage.keySet();
-        for (CustomBlock block : blocks) {
+        for (CustomTransparentBlock block : blocks) {
             if (activeStoredBlocks.contains(block.getArmorStand().getUniqueId().toString())) {
                 activeStoredBlocks.remove(block.getArmorStand().getUniqueId().toString());
                 continue;
@@ -146,14 +143,14 @@ public class CustomBlockManager {
         return false;
     }
 
-    private static HashMap<UUID, CustomBlock> parseChunkStorageFile(Chunk chunk, Yaml storage) {
+    private static HashMap<UUID, CustomTransparentBlock> parseChunkStorageFile(Chunk chunk, Yaml storage) {
 
-        HashMap<UUID, CustomBlock> blocks = new HashMap<>();
+        HashMap<UUID, CustomTransparentBlock> blocks = new HashMap<>();
 
         Set<String> sections = storage.keySet();
 
         for (String section : sections) {
-            CustomBlock block = new CustomBlock(section, chunk);
+            CustomTransparentBlock block = new CustomTransparentBlock(section, chunk);
             if (block.getArmorStand() == null) continue;
             blocks.put(block.getArmorStand().getUniqueId(), block);
         }

@@ -1,4 +1,4 @@
 package me.playajames.oraxentransparentblocks.Events;
 
-public class CustomBlockPrePlaceEvent {
+public class OraxenTransparentBlockInteractEvent {
 }

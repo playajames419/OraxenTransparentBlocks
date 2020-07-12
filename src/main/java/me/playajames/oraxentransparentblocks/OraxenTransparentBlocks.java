@@ -2,10 +2,11 @@ package me.playajames.oraxentransparentblocks;
 
 import de.leonhard.storage.Config;
 import io.th0rgal.oraxen.mechanics.MechanicsManager;
+import me.playajames.oraxentransparentblocks.Commands.OTBCommand;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkLoadListener;
 import me.playajames.oraxentransparentblocks.Listeners.ChunkUnloadListener;
-import me.playajames.oraxentransparentblocks.Listeners.PlayerJoinListener;
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanicFactory;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class OraxenTransparentBlocks extends JavaPlugin {
@@ -16,13 +17,16 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
     public void onEnable() {
         loadConfig();
         registerListeners();
-        MechanicsManager.registerMechanicFactory("transparentBlock", TransparentBlockMechanicFactory.class);
+        registerCommands();
+        startScheduler();
+        MechanicsManager.registerMechanicFactory("transparent_block", TransparentBlockMechanicFactory.class);
+        getLogger().info("Mechanic 'transparentBlock' registered with Oraxen.");
         getLogger().info("Enabled successfully.");
     }
 
     @Override
     public void onDisable() {
-        CustomBlockManager.saveAll();
+        CustomTransparentBlockManager.saveAll();
         getLogger().info("Disabled successfully.");
     }
 
@@ -34,8 +38,20 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
     }
 
     private void registerListeners() {
-        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChunkLoadListener(), this);
         this.getServer().getPluginManager().registerEvents(new ChunkUnloadListener(), this);
     }
+
+    private void registerCommands() {
+        this.getCommand("otb").setExecutor(new OTBCommand());
+    }
+
+    private void startScheduler() {
+        try {
+            Bukkit.getScheduler().runTaskTimer(this, () -> CustomTransparentBlockManager.saveAll(), 20L * CONFIG.getInt("save_interval"), 20L * CONFIG.getInt("save_interval"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
