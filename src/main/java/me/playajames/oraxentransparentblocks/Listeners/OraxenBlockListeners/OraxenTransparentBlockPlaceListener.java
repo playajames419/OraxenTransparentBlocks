@@ -1,14 +1,17 @@
-package me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners;
+package me.playajames.oraxentransparentblocks.Listeners.OraxenBlockListeners;
 
 import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
-import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlock;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlockManager;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPlaceEvent;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPrePlaceEvent;
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanic;
 import me.playajames.oraxentransparentblocks.Utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -16,11 +19,11 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomTransparentBlockPlaceListener implements Listener {
+public class OraxenTransparentBlockPlaceListener implements Listener {
 
     private final MechanicFactory factory;
 
-    public CustomTransparentBlockPlaceListener(MechanicFactory factory) {
+    public OraxenTransparentBlockPlaceListener(MechanicFactory factory) {
         this.factory = factory;
     }
 
@@ -34,22 +37,26 @@ public class CustomTransparentBlockPlaceListener implements Listener {
         String oraxenItemId = OraxenItems.getIdByItem(item);
         if (oraxenItemId == null) return;
 
-        // This keeps returning true.
         if (factory.isNotImplementedIn(oraxenItemId)) return;
 
         Location location = event.getClickedBlock().getLocation().getBlock().getRelative(event.getBlockFace()).getLocation();
         location.add(0.5, 0, 0.5);
 
+        // Check is armorstand already exists at location
+        for (Entity entity : location.getWorld().getNearbyEntities(location, 0.5, 1.0, 0.5)) {
+            if (!(entity instanceof ArmorStand)) break;
+            if (OraxenTransparentBlockManager.isBlock((ArmorStand) entity)) return;
+        }
+
         if (!PlayerUtils.canBuild(event.getPlayer(), location)) return;
 
-        // This is returning a null mechanic
         TransparentBlockMechanic mechanic = (TransparentBlockMechanic) factory.getMechanic(oraxenItemId);
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPrePlaceEvent(event.getPlayer(), item, location));
 
         event.getPlayer().getInventory().setItemInMainHand(item.clone().subtract(1));
 
-        CustomTransparentBlock block = new CustomTransparentBlock(item, location, mechanic.isVisible(), mechanic.isSmall(), mechanic.hasGravity());
+        OraxenTransparentBlock block = new OraxenTransparentBlock(item, location, mechanic.isVisible(), mechanic.isSmall(), mechanic.hasGravity());
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), block));
 

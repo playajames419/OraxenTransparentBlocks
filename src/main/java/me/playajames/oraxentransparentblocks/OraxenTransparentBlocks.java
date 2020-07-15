@@ -21,13 +21,12 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
         startScheduler();
         MechanicsManager.registerMechanicFactory("transparent_block", TransparentBlockMechanicFactory.class);
         getLogger().info("Mechanic 'transparentBlock' registered with Oraxen.");
-        //OraxenItems.loadItems();
         getLogger().info("Enabled successfully.");
     }
 
     @Override
     public void onDisable() {
-        CustomTransparentBlockManager.saveAll();
+        OraxenTransparentBlockManager.saveAll();
         getLogger().info("Disabled successfully.");
     }
 
@@ -49,7 +48,7 @@ public final class OraxenTransparentBlocks extends JavaPlugin {
 
     private void startScheduler() {
         try {
-            Bukkit.getScheduler().runTaskTimer(this, () -> CustomTransparentBlockManager.saveAll(), 20L * CONFIG.getInt("save_interval"), 20L * CONFIG.getInt("save_interval"));
+            Bukkit.getScheduler().runTaskTimer(this, () -> OraxenTransparentBlockManager.saveAll(), 20L * CONFIG.getInt("save_interval"), 20L * CONFIG.getInt("save_interval"));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,28 +1,30 @@
 package me.playajames.oraxentransparentblocks.Events;
 
-import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlock;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.jetbrains.annotations.NotNull;
 
 public class OraxenTransparentBlockPreBreakEvent extends Event implements Cancellable {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean canceled;
     private Player player;
-    private CustomTransparentBlock block;
+    private OraxenTransparentBlock block;
 
-    public OraxenTransparentBlockPreBreakEvent(Player player, CustomTransparentBlock block) {
+    public OraxenTransparentBlockPreBreakEvent(Player player, OraxenTransparentBlock block) {
         this.player = player;
         this.block = block;
         this.canceled = false;
     }
 
-    @Override
-    public @NotNull HandlerList getHandlers() {
-        return handlers;
+    public Player getPlayer() {
+        return player;
+    }
+
+    public OraxenTransparentBlock getBlock() {
+        return block;
     }
 
     @Override
@@ -35,11 +37,12 @@ public class OraxenTransparentBlockPreBreakEvent extends Event implements Cancel
         this.canceled = canceled;
     }
 
-    public Player getPlayer() {
-        return player;
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 
-    public CustomTransparentBlock getBlock() {
-        return block;
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }

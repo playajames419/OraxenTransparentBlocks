@@ -9,25 +9,25 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class CustomTransparentBlock {
+public class OraxenTransparentBlock {
     @NotNull
     private ArmorStand armorStand;
 
-    public CustomTransparentBlock(ItemStack item, Location location, boolean isVisible, boolean isSmall, boolean hasGravity) {
+    public OraxenTransparentBlock(ItemStack item, Location location, boolean isVisible, boolean isSmall, boolean hasGravity) {
         this.armorStand = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
         armorStand.setVisible(isVisible);
         armorStand.setSmall(isSmall);
         armorStand.setGravity(hasGravity);
         armorStand.getEquipment().setHelmet(item);
         armorStand.addDisabledSlots(EquipmentSlot.HEAD);
-        CustomTransparentBlockManager.addBlock(this);
+        OraxenTransparentBlockManager.addBlock(this);
     }
 
-    public CustomTransparentBlock(ArmorStand armorStand) {
+    public OraxenTransparentBlock(ArmorStand armorStand) {
         this.armorStand = armorStand;
     }
 
-    public CustomTransparentBlock(String serializedCustomBlock, Chunk chunk) {
+    public OraxenTransparentBlock(String serializedCustomBlock, Chunk chunk) {
         this.armorStand = ArmorStandUtils.findArmorStand(serializedCustomBlock, chunk);
     }
 
@@ -35,20 +35,12 @@ public class CustomTransparentBlock {
         return armorStand;
     }
 
-//    public void breakNaturally() {
-//        World world = armorStand.getWorld();
-//        if (getDrops() != null)
-//            for (Loot drop : getDrops())
-//                drop.dropNaturally(armorStand.getLocation(), 0);
-//        destroy();
-//    }
-
     public void setBlockType(ItemStack item) {
         armorStand.getEquipment().setHelmet(item);
     }
 
     public void destroy() {
-        CustomTransparentBlockManager.removeBlock(this);
+        OraxenTransparentBlockManager.removeBlock(this);
         armorStand.remove();
     }
 

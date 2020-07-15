@@ -7,8 +7,8 @@ import org.bukkit.entity.ArmorStand;
 
 import java.util.*;
 
-public class CustomTransparentBlockManager {
-    private static HashMap<World, HashMap<Chunk, HashMap<UUID, CustomTransparentBlock>>> loadedBlocks = new HashMap<>();
+public class OraxenTransparentBlockManager {
+    private static HashMap<World, HashMap<Chunk, HashMap<UUID, OraxenTransparentBlock>>> loadedBlocks = new HashMap<>();
     private static String dataFolderPath = OraxenTransparentBlocks.getPlugin(OraxenTransparentBlocks.class).getDataFolder().getPath() + "/data/";
 
     public static boolean isBlock(ArmorStand armorStand) {
@@ -16,7 +16,7 @@ public class CustomTransparentBlockManager {
         return false;
     }
 
-    public static boolean addBlock(CustomTransparentBlock block) {
+    public static boolean addBlock(OraxenTransparentBlock block) {
         Chunk chunk = block.getArmorStand().getLocation().getChunk();
         if (!isChunkLoaded(chunk)) return false;
         if (loadedBlocks.get(chunk.getWorld()).get(chunk).containsKey(block.getArmorStand().getUniqueId())) return false;
@@ -24,7 +24,7 @@ public class CustomTransparentBlockManager {
         return true;
     }
 
-    public static boolean removeBlock(CustomTransparentBlock block) {
+    public static boolean removeBlock(OraxenTransparentBlock block) {
         Chunk chunk = block.getArmorStand().getLocation().getChunk();
         if (!isChunkLoaded(chunk)) return false;
         if (!loadedBlocks.get(chunk.getWorld()).get(chunk).containsKey(block.getArmorStand().getUniqueId())) return false;
@@ -55,7 +55,7 @@ public class CustomTransparentBlockManager {
 
     public static boolean loadChunk(Chunk chunk) {
         Yaml storage = new Yaml(String.valueOf(chunk.getChunkKey()), dataFolderPath + chunk.getWorld().getUID());
-        HashMap<UUID, CustomTransparentBlock> blocks = parseChunkStorageFile(chunk, storage);
+        HashMap<UUID, OraxenTransparentBlock> blocks = parseChunkStorageFile(chunk, storage);
         if (!worldMapExists(chunk.getWorld())) generateWorldMap(chunk.getWorld());
         if (isChunkLoaded(chunk)) return true;
         loadedBlocks.get(chunk.getWorld()).put(chunk, blocks);
@@ -69,27 +69,27 @@ public class CustomTransparentBlockManager {
         return false;
     }
 
-    public static CustomTransparentBlock getBlock(ArmorStand armorStand) {
-        List<CustomTransparentBlock> blocks = getBlocks(armorStand.getChunk());
-        for (CustomTransparentBlock block : blocks)
+    public static OraxenTransparentBlock getBlock(ArmorStand armorStand) {
+        List<OraxenTransparentBlock> blocks = getBlocks(armorStand.getChunk());
+        for (OraxenTransparentBlock block : blocks)
             if (block.getArmorStand().getUniqueId().equals(armorStand.getUniqueId()))
                 return block;
         return null;
     }
 
-    public static List<CustomTransparentBlock> getBlocks(World world) {
-        List<CustomTransparentBlock> blocksList = new ArrayList<CustomTransparentBlock>();
+    public static List<OraxenTransparentBlock> getBlocks(World world) {
+        List<OraxenTransparentBlock> blocksList = new ArrayList<OraxenTransparentBlock>();
         if (loadedBlocks.isEmpty()) return null;
-        for (HashMap<UUID, CustomTransparentBlock> chunkBlockMap : loadedBlocks.get(world).values())
-            for (CustomTransparentBlock block : chunkBlockMap.values())
+        for (HashMap<UUID, OraxenTransparentBlock> chunkBlockMap : loadedBlocks.get(world).values())
+            for (OraxenTransparentBlock block : chunkBlockMap.values())
                 blocksList.add(block);
         return blocksList;
     }
 
-    public static List<CustomTransparentBlock> getBlocks(Chunk chunk) {
+    public static List<OraxenTransparentBlock> getBlocks(Chunk chunk) {
         if (!isChunkLoaded(chunk)) return null;
-        List<CustomTransparentBlock> blocksList = new ArrayList<>();
-        for (CustomTransparentBlock block : loadedBlocks.get(chunk.getWorld()).get(chunk).values())
+        List<OraxenTransparentBlock> blocksList = new ArrayList<>();
+        for (OraxenTransparentBlock block : loadedBlocks.get(chunk.getWorld()).get(chunk).values())
             blocksList.add(block);
         return blocksList;
     }
@@ -103,9 +103,9 @@ public class CustomTransparentBlockManager {
     public static void saveChunk(Chunk chunk) {
         if (!isChunkLoaded(chunk)) return;
         Yaml storage = new Yaml(String.valueOf(chunk.getChunkKey()), dataFolderPath + chunk.getWorld().getUID());
-        Collection<CustomTransparentBlock> blocks = loadedBlocks.get(chunk.getWorld()).get(chunk).values();
+        Collection<OraxenTransparentBlock> blocks = loadedBlocks.get(chunk.getWorld()).get(chunk).values();
         Set<String> activeStoredBlocks = storage.keySet();
-        for (CustomTransparentBlock block : blocks) {
+        for (OraxenTransparentBlock block : blocks) {
             if (activeStoredBlocks.contains(block.getArmorStand().getUniqueId().toString())) {
                 activeStoredBlocks.remove(block.getArmorStand().getUniqueId().toString());
                 continue;
@@ -122,26 +122,26 @@ public class CustomTransparentBlockManager {
             saveWorld(world);
     }
 
-    public static int clean() {
-        return -1;
-    }
-
-    public static int clean(long chunkId) {
-        return -1;
-    }
+//    public static int clean() {
+//        return -1;
+//    }
+//
+//    public static int clean(long chunkId) {
+//        return -1;
+//    }
 
     public static boolean destroyChunkStorageFile(long chunkId) {
         return false;
     }
 
-    private static HashMap<UUID, CustomTransparentBlock> parseChunkStorageFile(Chunk chunk, Yaml storage) {
+    private static HashMap<UUID, OraxenTransparentBlock> parseChunkStorageFile(Chunk chunk, Yaml storage) {
 
-        HashMap<UUID, CustomTransparentBlock> blocks = new HashMap<>();
+        HashMap<UUID, OraxenTransparentBlock> blocks = new HashMap<>();
 
         Set<String> sections = storage.keySet();
 
         for (String section : sections) {
-            CustomTransparentBlock block = new CustomTransparentBlock(section, chunk);
+            OraxenTransparentBlock block = new OraxenTransparentBlock(section, chunk);
             if (block.getArmorStand() == null) continue;
             blocks.put(block.getArmorStand().getUniqueId(), block);
         }

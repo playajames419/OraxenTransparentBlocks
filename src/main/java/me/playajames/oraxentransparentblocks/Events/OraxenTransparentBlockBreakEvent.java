@@ -6,7 +6,6 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 public class OraxenTransparentBlockBreakEvent extends Event implements Cancellable {
 
@@ -23,9 +22,16 @@ public class OraxenTransparentBlockBreakEvent extends Event implements Cancellab
         this.canceled = false;
     }
 
-    @Override
-    public @NotNull HandlerList getHandlers() {
-        return handlers;
+    public Player getPlayer() {
+        return player;
+    }
+
+    public ItemStack getItem() {
+        return item;
+    }
+
+    public Location getLocation() {
+        return location;
     }
 
     @Override
@@ -38,15 +44,12 @@ public class OraxenTransparentBlockBreakEvent extends Event implements Cancellab
         this.canceled = canceled;
     }
 
-    public Player getPlayer() {
-        return player;
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
     }
 
-    public ItemStack getItem() {
-        return item;
-    }
-
-    public Location getLocation() {
-        return location;
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }

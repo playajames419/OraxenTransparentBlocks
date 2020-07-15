@@ -1,10 +1,10 @@
-package me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners;
+package me.playajames.oraxentransparentblocks.Listeners.OraxenBlockListeners;
 
 import io.th0rgal.oraxen.items.OraxenItems;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
 import io.th0rgal.oraxen.utils.drops.Loot;
-import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
-import me.playajames.oraxentransparentblocks.CustomTransparentBlockManager;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlock;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlockManager;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockBreakEvent;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPreBreakEvent;
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanic;
@@ -19,11 +19,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
-public class CustomTransparentBlockBreakListener implements Listener {
+public class OraxenTransparentBlockBreakListener implements Listener {
 
     private final MechanicFactory factory;
 
-    public CustomTransparentBlockBreakListener(MechanicFactory factory) {
+    public OraxenTransparentBlockBreakListener(MechanicFactory factory) {
         this.factory = factory;
     }
 
@@ -35,9 +35,9 @@ public class CustomTransparentBlockBreakListener implements Listener {
         Player player = (Player) event.getDamager();
         ArmorStand armorStand = (ArmorStand) event.getEntity();
 
-        if (!CustomTransparentBlockManager.isBlock(armorStand)) return;
+        if (!OraxenTransparentBlockManager.isBlock(armorStand)) return;
 
-        CustomTransparentBlock block = CustomTransparentBlockManager.getBlock(armorStand);
+        OraxenTransparentBlock block = OraxenTransparentBlockManager.getBlock(armorStand);
 
         if (!PlayerUtils.canBuild(player, block.getArmorStand().getLocation())) return;
 

@@ -22,20 +22,6 @@ public class OraxenTransparentBlockPrePlaceEvent extends Event implements Cancel
         this.canceled = false;
     }
 
-    @Override
-    public boolean isCancelled() {
-        return canceled;
-    }
-
-    @Override
-    public void setCancelled(boolean canceled) {
-        this.canceled = canceled;
-    }
-
-    public HandlerList getHandlers() {
-        return handlers;
-    }
-
     public ItemStack getItem() {
         return item;
     }
@@ -46,5 +32,24 @@ public class OraxenTransparentBlockPrePlaceEvent extends Event implements Cancel
 
     public Player getPlayer() {
         return player;
+    }
+
+    @Override
+    public boolean isCancelled() {
+        return canceled;
+    }
+
+    @Override
+    public void setCancelled(boolean canceled) {
+        this.canceled = canceled;
+    }
+
+    @Override
+    public HandlerList getHandlers() {
+        return handlers;
+    }
+
+    public static HandlerList getHandlerList() {
+        return handlers;
     }
 }

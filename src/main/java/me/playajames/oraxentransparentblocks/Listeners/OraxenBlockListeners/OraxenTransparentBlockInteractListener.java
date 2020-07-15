@@ -1,7 +1,7 @@
-package me.playajames.oraxentransparentblocks.Listeners.CustomBlockListeners;
+package me.playajames.oraxentransparentblocks.Listeners.OraxenBlockListeners;
 
-import me.playajames.oraxentransparentblocks.CustomTransparentBlock;
-import me.playajames.oraxentransparentblocks.CustomTransparentBlockManager;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlock;
+import me.playajames.oraxentransparentblocks.OraxenTransparentBlockManager;
 import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockInteractEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.ArmorStand;
@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 
-public class CustomTransparentBlockInteractListener implements Listener {
+public class OraxenTransparentBlockInteractListener implements Listener {
 
     @EventHandler
     public void onCustomBlockInteract(PlayerInteractAtEntityEvent event) {
@@ -17,9 +17,9 @@ public class CustomTransparentBlockInteractListener implements Listener {
 
         ArmorStand armorStand = (ArmorStand) event.getRightClicked();
 
-        if (!CustomTransparentBlockManager.isBlock(armorStand)) return;
+        if (!OraxenTransparentBlockManager.isBlock(armorStand)) return;
 
-        CustomTransparentBlock block = CustomTransparentBlockManager.getBlock(armorStand);
+        OraxenTransparentBlock block = OraxenTransparentBlockManager.getBlock(armorStand);
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockInteractEvent(event.getPlayer(), block, event.getHand()));
 
