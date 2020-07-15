@@ -27,33 +27,23 @@ Create a custom item/block using [Oraxen](https://github.com/oraxen/Oraxen) and 
 ### Example:
 
 ```yaml
-test-block:
-  displayname: '&7Test Block'
-  material: STICK
-  Pack:
-    generate_model: true
-    parent_model: block/cube_all
-    textures:
-    - sweet_test_texture
-    custom_model_data: 1
-  Mechanics:
-    transparent_block:
-      # These settings arent working yet
-      armorstand_visible: true
-      armorstand_small: true
-caveblock:
-  displayname: '&7Cave Block'
+caveblock_transparent:
+  displayname: "&7Cave Block Transparent"
   material: DIAMOND
   Pack:
     generate_model: false
     model: caveblock
-    custom_model_data: 1
   Mechanics:
     transparent_block:
-      # These settings arent working yet
+      # Sounds not implemented yet
+      #break_sound: BLOCK_GLASS_BREAK
       armorstand_visible: false
-      armorstand_small: true
-      drops:
+      armorstand_small: false
+      block_gravity: false
+      drop:
+        loots:
+          - {oraxen_item: caveblock_transparent, probability: 1.0, max_amount: 1}
+          - {minecraft_type: DIRT, probability: 1, max_amount: 1}
 ```
 
 ## Block Models
@@ -81,7 +71,7 @@ Although not very extensive, this plugin call's the following custom events for 
 <dependency>
     <groupId>com.github.playajames419</groupId>
     <artifactId>OraxenTransparentBlocks</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 </dependency>
 ```
 
