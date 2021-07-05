@@ -106,5 +106,12 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.34.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>io.th0rgal</groupId>
+            <artifactId>oraxen</artifactId>
+            <version>1.79.0</version>
+            <scope>system</scope>
+            <systemPath>C:/Users/James Kennedy/Dropbox/James/Workspace/OraxenTransparentBlocks/src/main/resources/oraxen-1.79.0-all.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

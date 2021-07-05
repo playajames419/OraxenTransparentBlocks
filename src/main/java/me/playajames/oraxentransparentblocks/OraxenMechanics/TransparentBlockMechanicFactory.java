@@ -3,7 +3,6 @@ package me.playajames.oraxentransparentblocks.OraxenMechanics;
 import io.th0rgal.oraxen.mechanics.Mechanic;
 import io.th0rgal.oraxen.mechanics.MechanicFactory;
 import me.playajames.oraxentransparentblocks.Listeners.OraxenBlockListeners.OraxenTransparentBlockBreakListener;
-import me.playajames.oraxentransparentblocks.Listeners.OraxenBlockListeners.OraxenTransparentBlockInteractListener;
 import me.playajames.oraxentransparentblocks.Listeners.OraxenBlockListeners.OraxenTransparentBlockPlaceListener;
 import me.playajames.oraxentransparentblocks.OraxenTransparentBlocks;
 import org.bukkit.Bukkit;

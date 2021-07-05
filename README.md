@@ -20,6 +20,15 @@ You must have [Oraxen](https://github.com/oraxen/Oraxen), [WorldEdit](https://gi
 
 Place the plugin jar file in your servers plugins directory.
 
+### Adding Transparent Block Mechanic to Oraxen
+
+Add the following to mechanics.yml in your Oraxen plugin folder
+
+```yaml
+transparent_block:
+  enabled: true
+```
+
 ## Configuring Blocks
 
 Create a custom item/block using [Oraxen](https://github.com/oraxen/Oraxen) and give your item/block the transpatent_block mechanic.
@@ -27,23 +36,22 @@ Create a custom item/block using [Oraxen](https://github.com/oraxen/Oraxen) and 
 ### Example:
 
 ```yaml
-caveblock_transparent:
-  displayname: "&7Cave Block Transparent"
+transparent_block:
+  displayname: '&7Transparent Block'
   material: DIAMOND
   Pack:
     generate_model: false
-    model: caveblock
+    model: transparent_block
   Mechanics:
     transparent_block:
-      # Sounds not implemented yet
-      #break_sound: BLOCK_GLASS_BREAK
+      custom_variation: 25
       armorstand_visible: false
       armorstand_small: false
       block_gravity: false
+      break_sound: BLOCK_GLASS_BREAK
       drop:
         loots:
-          - {oraxen_item: caveblock_transparent, probability: 1.0, max_amount: 1}
-          - {minecraft_type: DIRT, probability: 1, max_amount: 1}
+          - {oraxen_item: transparent_block, probability: 1.0, max_amount: 1}
 ```
 
 ## Block Models
@@ -71,7 +79,7 @@ Although not very extensive, this plugin call's the following custom events for 
 <dependency>
     <groupId>com.github.playajames419</groupId>
     <artifactId>OraxenTransparentBlocks</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
 </dependency>
 ```
 
