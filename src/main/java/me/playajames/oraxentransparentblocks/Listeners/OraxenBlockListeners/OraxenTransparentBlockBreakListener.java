@@ -41,7 +41,11 @@ public class OraxenTransparentBlockBreakListener implements Listener {
 
         if (!PlayerUtils.canBuild(player, block.getArmorStand().getLocation())) return;
 
-        Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPreBreakEvent(player, block));
+        OraxenTransparentBlockPreBreakEvent preBreakEvent = new OraxenTransparentBlockPreBreakEvent(player, block);
+
+        Bukkit.getPluginManager().callEvent(preBreakEvent);
+
+        if (preBreakEvent.isCancelled()) return;
 
         ItemStack item = block.getArmorStand().getItem(EquipmentSlot.HEAD);
         Location location = block.getArmorStand().getLocation();
@@ -50,8 +54,16 @@ public class OraxenTransparentBlockBreakListener implements Listener {
 
         block.destroy();
 
-        for (Loot loot : mechanic.getDrops())
+        if (mechanic.getBreakSound() != null)
+            block.getArmorStand().getWorld().playSound(block.getArmorStand().getLocation(), mechanic.getBreakSound(), 1, 1);
+
+        for (Loot loot : mechanic.getDrops()) {
+            if (loot == null) {
+                Bukkit.getLogger().info("Drop item not found, check configuration file for " + block.getArmorStand().getItem(EquipmentSlot.HEAD).displayName() + ".");
+                continue;
+            }
             loot.dropNaturally(location, 1);
+        }
 
         Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockBreakEvent(player, item, location));
 

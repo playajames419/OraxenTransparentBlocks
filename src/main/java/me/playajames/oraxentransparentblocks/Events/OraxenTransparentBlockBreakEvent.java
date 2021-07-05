@@ -7,7 +7,7 @@ import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 import org.bukkit.inventory.ItemStack;
 
-public class OraxenTransparentBlockBreakEvent extends Event implements Cancellable {
+public class OraxenTransparentBlockBreakEvent extends Event {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean canceled;
@@ -32,16 +32,6 @@ public class OraxenTransparentBlockBreakEvent extends Event implements Cancellab
 
     public Location getLocation() {
         return location;
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return canceled;
-    }
-
-    @Override
-    public void setCancelled(boolean canceled) {
-        this.canceled = canceled;
     }
 
     @Override

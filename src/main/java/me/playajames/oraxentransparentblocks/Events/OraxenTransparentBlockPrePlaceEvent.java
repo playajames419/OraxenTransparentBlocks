@@ -26,6 +26,10 @@ public class OraxenTransparentBlockPrePlaceEvent extends Event implements Cancel
         return item;
     }
 
+    public void setItem(ItemStack item) {
+        this.item = item;
+    }
+
     public Location getLocation() {
         return location;
     }

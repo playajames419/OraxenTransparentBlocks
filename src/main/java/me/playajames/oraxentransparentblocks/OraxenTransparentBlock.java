@@ -23,12 +23,8 @@ public class OraxenTransparentBlock {
         OraxenTransparentBlockManager.addBlock(this);
     }
 
-    public OraxenTransparentBlock(ArmorStand armorStand) {
-        this.armorStand = armorStand;
-    }
-
-    public OraxenTransparentBlock(String serializedCustomBlock, Chunk chunk) {
-        this.armorStand = ArmorStandUtils.findArmorStand(serializedCustomBlock, chunk);
+    public OraxenTransparentBlock(String worldId, String chunkId, String uuidString) {
+        this.armorStand = ArmorStandUtils.findArmorStand(worldId, chunkId, uuidString);
     }
 
     public ArmorStand getArmorStand() {

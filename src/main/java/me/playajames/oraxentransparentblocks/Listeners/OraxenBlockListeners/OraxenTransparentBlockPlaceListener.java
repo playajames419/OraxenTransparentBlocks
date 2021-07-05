@@ -52,13 +52,17 @@ public class OraxenTransparentBlockPlaceListener implements Listener {
 
         TransparentBlockMechanic mechanic = (TransparentBlockMechanic) factory.getMechanic(oraxenItemId);
 
-        Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPrePlaceEvent(event.getPlayer(), item, location));
+        OraxenTransparentBlockPrePlaceEvent prePlaceEvent = new OraxenTransparentBlockPrePlaceEvent(event.getPlayer(), item, location);
+
+        Bukkit.getPluginManager().callEvent(prePlaceEvent);
+
+        if (prePlaceEvent.isCancelled()) return;
 
         event.getPlayer().getInventory().setItemInMainHand(item.clone().subtract(1));
 
         OraxenTransparentBlock block = new OraxenTransparentBlock(item, location, mechanic.isVisible(), mechanic.isSmall(), mechanic.hasGravity());
 
-        Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), block));
+        Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), item, block));
 
     }
 }

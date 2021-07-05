@@ -2,20 +2,22 @@ package me.playajames.oraxentransparentblocks.Events;
 
 import me.playajames.oraxentransparentblocks.OraxenTransparentBlock;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
+import org.bukkit.inventory.ItemStack;
 
-public class OraxenTransparentBlockPlaceEvent extends Event implements Cancellable {
+public class OraxenTransparentBlockPlaceEvent extends Event  {
 
     private static final HandlerList handlers = new HandlerList();
     private boolean canceled;
     private Player player;
+    private ItemStack item;
     private OraxenTransparentBlock block;
 
-    public OraxenTransparentBlockPlaceEvent(Player player, OraxenTransparentBlock block) {
+    public OraxenTransparentBlockPlaceEvent(Player player, ItemStack item, OraxenTransparentBlock block) {
         this.player = player;
         this.block = block;
+        this.item = item;
         this.canceled = false;
     }
 
@@ -23,18 +25,12 @@ public class OraxenTransparentBlockPlaceEvent extends Event implements Cancellab
         return player;
     }
 
+    public ItemStack getItem() {
+        return item;
+    }
+
     public OraxenTransparentBlock getBlock() {
         return block;
-    }
-
-    @Override
-    public boolean isCancelled() {
-        return canceled;
-    }
-
-    @Override
-    public void setCancelled(boolean canceled) {
-        this.canceled = canceled;
     }
 
     @Override
