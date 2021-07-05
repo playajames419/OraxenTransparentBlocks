@@ -4,7 +4,7 @@
 
 This is an addon to the Premium plugin [Oraxen](https://github.com/oraxen/Oraxen). It adds the ability to use custom models that are transparent or don't fill an entire block without render issues.
 
-Native Version: 1.16.1
+Native Version: 1.17
 
 ![With](https://i.imgur.com/JXxGKBj.png)
 
