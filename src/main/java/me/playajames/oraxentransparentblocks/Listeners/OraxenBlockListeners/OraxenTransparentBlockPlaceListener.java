@@ -9,6 +9,7 @@ import me.playajames.oraxentransparentblocks.Events.OraxenTransparentBlockPrePla
 import me.playajames.oraxentransparentblocks.OraxenMechanics.TransparentBlockMechanic;
 import me.playajames.oraxentransparentblocks.Utils.PlayerUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
@@ -58,11 +59,11 @@ public class OraxenTransparentBlockPlaceListener implements Listener {
 
         if (prePlaceEvent.isCancelled()) return;
 
-        event.getPlayer().getInventory().setItemInMainHand(item.clone().subtract(1));
+        if (!event.getPlayer().getGameMode().equals(GameMode.CREATIVE))event.getPlayer().getInventory().setItemInMainHand(item.clone().subtract(1));
 
         OraxenTransparentBlock block = new OraxenTransparentBlock(item, location, mechanic.isVisible(), mechanic.isSmall(), mechanic.hasGravity());
 
-        Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), item, block));
+        Bukkit.getPluginManager().callEvent(new OraxenTransparentBlockPlaceEvent(event.getPlayer(), item, event.getClickedBlock(), block));
 
     }
 }

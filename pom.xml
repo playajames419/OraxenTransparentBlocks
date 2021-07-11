@@ -6,7 +6,7 @@
 
     <groupId>me.playajames</groupId>
     <artifactId>OraxenTransparentBlocks</artifactId>
-    <version>1.1-SNAPSHOT</version>
+    <version>1.1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>OraxenTransparentBlocks</name>

@@ -1,6 +1,7 @@
 package me.playajames.oraxentransparentblocks.Events;
 
 import me.playajames.oraxentransparentblocks.OraxenTransparentBlock;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -12,12 +13,14 @@ public class OraxenTransparentBlockPlaceEvent extends Event  {
     private boolean canceled;
     private Player player;
     private ItemStack item;
+    private Block clickedBlock;
     private OraxenTransparentBlock block;
 
-    public OraxenTransparentBlockPlaceEvent(Player player, ItemStack item, OraxenTransparentBlock block) {
+    public OraxenTransparentBlockPlaceEvent(Player player, ItemStack item, Block clickedBlock, OraxenTransparentBlock block) {
         this.player = player;
         this.block = block;
         this.item = item;
+        this.clickedBlock = clickedBlock;
         this.canceled = false;
     }
 

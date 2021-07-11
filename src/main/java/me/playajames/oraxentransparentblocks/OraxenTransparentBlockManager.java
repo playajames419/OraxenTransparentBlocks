@@ -12,8 +12,6 @@ import java.util.*;
 import static me.playajames.oraxentransparentblocks.OraxenTransparentBlocks.CONNECTION;
 
 public class OraxenTransparentBlockManager {
-    private static HashMap<World, HashMap<Chunk, HashMap<UUID, OraxenTransparentBlock>>> loadedBlocks = new HashMap<>();
-    private static String dataFolderPath = OraxenTransparentBlocks.getPlugin(OraxenTransparentBlocks.class).getDataFolder().getPath() + "/data/";
 
     public static boolean isBlock(ArmorStand armorStand) {
         if (getBlock(armorStand) != null) return true;
