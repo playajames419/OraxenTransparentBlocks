@@ -1,7 +1,5 @@
 # Oraxen Transparent Blocks
 
-> This plugin is a work in progress, many features are not yet finished, including block drops.
-
 This is an addon to the Premium plugin [Oraxen](https://github.com/oraxen/Oraxen). It adds the ability to use custom models that are transparent or don't fill an entire block without render issues.
 
 Native Version: 1.17
